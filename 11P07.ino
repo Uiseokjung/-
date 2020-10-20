@@ -55,7 +55,7 @@ void loop() {
 
 // get a distance reading from the USS
   dist_raw = USS_measure(PIN_TRIG,PIN_ECHO);
-  dist_ema = 0.1 * dist_raw + 0.9 * dist_raw;
+  dist_ema = 0.1 * dist_raw + 0.9 * dist_ema;
 
 // output the read value to the serial port
   Serial.print("Min:100,raw:");
