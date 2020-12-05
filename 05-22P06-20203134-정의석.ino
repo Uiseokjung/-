@@ -25,7 +25,8 @@ float timeout; // unit: us
 float dist_min, dist_max, dist_raw, dist_prev, dist_ema, alpha; // unit: mm
 unsigned long last_sampling_time; // unit: ms
 float scale; // used for pulse duration to distance conversion
-
+float pterm;
+int duty_curr, duty_target;
 Servo myservo;
 
 void setup() {
@@ -74,11 +75,11 @@ void loop() {
     Serial.print("dist_ir:");
     Serial.print(dist_raw);
     Serial.print(",pterm:");
-    
+    Serial.print(map(pterm,-1000,1000,510,610));
     Serial.print(",duty_target:");
-    
+    Serial.print(map(duty_target,1000,2000,410,510));
     Serial.print(",duty_curr:");
-    
+    Serial.print(map(duty_curr,1000,2000,410,510));
     Serial.println(",Min:100,Low:200,dist_target:255,High:310,Max:410");
     
 
