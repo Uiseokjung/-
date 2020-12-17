@@ -191,26 +191,24 @@ float ir_distance(void){
   return val;
 }
 
-  float under_noise_filter(void){ 
-  int currReading;
-  int largestReading = 0;
+  float reducenoisefilter(void){ 
+  int currReading; int MaxReading = 0;
   for (int i = 0; i < samples_num; i++) {
     currReading = ir_distance();
-    if (currReading > largestReading) { largestReading = currReading; }
-    // Delay a short time before taking another reading
-    delayMicroseconds(DELAY_MICROS);
+    if (currReading > MaxReading) 
+      { MaxReading = currReading; }
+       delayMicroseconds(DELAY_MICROS);
   }
-  return largestReading;
+  return MaxReading;
 }
 
 float filtered_ir_distance(void){ 
-  int currReading;
-  int lowestReading = 1024;
+  int currReading; int MinReading = 1000;
   for (int i = 0; i < samples_num; i++) {
-    currReading = under_noise_filter();
-    if (currReading < lowestReading) { lowestReading = currReading; }
+    currReading = reducenoisefilter();
+    if (currReading < MinReading) 
+       { MinReading = currReading; }
   }
-  // eam 필터 추가
   ema_dist = EMA_ALPHA*lowestReading + (1-EMA_ALPHA)*ema_dist;
   return ema_dist + 45;
 }
