@@ -36,7 +36,7 @@
 #define _KP 1.2
 #define _KD 15
 #define _KI 0.5
-// IR Filtering(referenced by 박우혁)
+// IR Filtering
 #define _INTERVAL_DIST 30  
 #define DELAY_MICROS  1500 
 #define EMA_ALPHA 0.3     
